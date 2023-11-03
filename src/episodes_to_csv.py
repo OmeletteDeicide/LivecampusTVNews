@@ -8,7 +8,7 @@ def save_episodes_to_csv(episodes, csv_filename):
         writer = csv.writer(file, delimiter=';')
 
         # Écrire l'en-tête du CSV
-        writer.writerow(["nom série", "numéro episode", "numéro saison", "date diffusion", "origine", "plateform", "url"])
+        writer.writerow(["nom série", "numéro episode", "numéro saison", "date diffusion", "origine", "plateform", "url", "durée"])
 
         for episode in episodes:
             writer.writerow([
@@ -18,7 +18,8 @@ def save_episodes_to_csv(episodes, csv_filename):
                 episode.get("date diffusion", ""),
                 episode.get("origine", ""),
                 episode.get("plateform", ""),
-                episode.get("url", "")
+                episode.get("url", ""),
+                episode.get("durée", "")
             ])
 episodes = get_all_episode()
 
