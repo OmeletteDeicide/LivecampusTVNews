@@ -3,7 +3,7 @@ import sqlite3
 
 sqlite3.register_adapter(datetime.date, lambda val: val.isoformat())
 
-conn = sqlite3.connect('data/tv_programs.db')
+conn = sqlite3.connect('../data/tv_programs.db')
 cur = conn.cursor()
 
 
