@@ -8,7 +8,7 @@ def get_all_episode(by_date=False,by_chaine=False,with_time=False):
     if(by_date == False):
         by_date = datetime.datetime.now()
         by_date=by_date.strftime("%Y-%m")
-    # création dictionnaire pour y mettre chaque épisode
+    # création liste pour y mettre chaque épisode
     all_episodes = []
     # on récupère le code html de l'url
     url = "https://www.spin-off.fr/calendrier_des_series.html?date="+by_date

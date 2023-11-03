@@ -1,3 +1,6 @@
+# function qui prend en argument la liste des épisodes et qui return les infos épisodes par chaine, pays et les mots récurrents par titre de serie
+
+
 def infos_episode(liste_episodes):
     # création dictionnaire pour y inserer les infos
     resultat =  {
