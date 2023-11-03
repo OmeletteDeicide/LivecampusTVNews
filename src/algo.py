@@ -64,10 +64,6 @@ def infos_episode(liste_episodes):
 
 
 
-
-
-
-
       
 
 def group_list(lst):
