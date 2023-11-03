@@ -2,6 +2,8 @@ import requests
 from bs4 import BeautifulSoup
 import datetime
 
+# fonction qui prends en parametre la date "2023-11" si sur false la date actuelle sera pris en compte,
+# la chaine pour filtrer le résultat et with_time pour aller chercher la durée des épisodes seulement si le filtre par chaine est parametré
 
 def get_all_episode(by_date=False,by_chaine=False,with_time=False):
     # si la date n'est pas donné on prend la date actuel
