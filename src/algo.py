@@ -52,31 +52,3 @@ def infos_episode(liste_episodes):
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-      
-
-def group_list(lst):
-    x={}
-    for el in x:
-        x[el]=lst.count(el)
-    x =dict(sorted(x.items(), key=lambda item: item[1], reverse=True))
-            
-    return x
-     
-# Driver code
-lst = ["a", "a","b", "c", "d", "c", "c", "d"]
-print(group_list(lst))
