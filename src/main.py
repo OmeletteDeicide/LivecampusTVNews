@@ -4,8 +4,8 @@ from episodes_to_csv import save_episodes_to_csv
 from algo import infos_episode
 
 # Scraping 1/2 
-episodes_octobre = get_all_episode("2023-10")
-
+episodes_octobre = get_all_episode(False,"France 2",True)
+print(episodes_octobre)
 # Scraping 2/2 
 episodes_octobre_with_time = get_all_episode("2023-10","Apple tv+",True)
 
