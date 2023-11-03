@@ -40,7 +40,7 @@ def insert_multiple_datas(list_datas):
         cur.execute("INSERT INTO episode (nom, episode_number, season_number, diffusion_date, origin_country, "
                     "broadcast_channel, linked_url) VALUES (?, ?, ?, ?, ?, ?, ?)",
                     (data['nom série'], data['numéro episode'], data['numéro saison'], data['date diffusion'],
-                     data['date diffusion'], data['plateform'], data['url']))
+                     data['origine'], data['plateform'], data['url']))
 
     conn.commit()
 
