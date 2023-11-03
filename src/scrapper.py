@@ -1,7 +1,7 @@
 import requests
 from bs4 import BeautifulSoup
 
-def get_all_episode(duree=False):
+def get_all_episode():
     all_episodes = []
     # on récupère le code html de l'url
     url = "https://www.spin-off.fr/calendrier_des_series.html"
@@ -18,7 +18,6 @@ def get_all_episode(duree=False):
             # selection des elements avec la class "calendrier_episodes" qui contient l'url de la page de l'épisode
             calendrier_episodes = floatleftmobile.find_all(class_="calendrier_episodes")
             for index, calendrier_episode in enumerate(calendrier_episodes):
-                print(index)
                 #origine
                 origine = calendrier_episode.find_previous_sibling().find_previous_sibling().get("alt")
                 chaine = calendrier_episode.find_previous_sibling().get("alt")
@@ -35,9 +34,10 @@ def get_all_episode(duree=False):
                 "numéro episode":numero_episode,
                 "plateform":chaine,
                 "date diffusion":jour,
-                "url":url
+                "url":url,
+                "durée": ""
                 }
-                if(duree):
+                if(chaine=="Apple TV+"):
                     response = requests.get(url)
                     content = response.content
                     page = BeautifulSoup(content, 'html.parser')
@@ -45,9 +45,6 @@ def get_all_episode(duree=False):
                     #nom_episode = page.find('div',class_=['main_table']).find("meta", itemprop="name").get("content")
                     duree_episode = page.find('div',class_=['episode_infos_episode_format']).text.replace("\n","").replace("\t","").strip()
                     episode["durée"] = duree_episode
-                    all_episodes.append(episode)
-                    return all_episodes
                 all_episodes.append(episode)
     return all_episodes
-
 
