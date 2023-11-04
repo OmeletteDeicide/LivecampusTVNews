@@ -1,7 +1,7 @@
 import datetime
 import sqlite3
 
-from src.main import get_all_episode
+from src.scrapper import get_all_episode
 
 sqlite3.register_adapter(datetime.date, lambda val: val.isoformat())
 
