@@ -49,6 +49,17 @@ def insert_multiple_datas(list_datas):
                     "broadcast_channel, linked_url) VALUES (?, ?, ?, ?, ?, ?, ?)",
                     (data['nom série'], data['numéro episode'], data['numéro saison'], data['date diffusion'],
                      data['origine'], data['chaine'], data['url']))
+
+    conn.commit()
+
+
+def insert_multiple_datas_with_duration(list_datas):
+    i = 1
+    for data in list_datas:
+        cur.execute("INSERT INTO episode (nom, episode_number, season_number, diffusion_date, origin_country, "
+                    "broadcast_channel, linked_url) VALUES (?, ?, ?, ?, ?, ?, ?)",
+                    (data['nom série'], data['numéro episode'], data['numéro saison'], data['date diffusion'],
+                     data['origine'], data['chaine'], data['url']))
         cur.execute(
             "SELECT id FROM episode WHERE nom=? AND episode_number=? AND season_number=? AND diffusion_date=?;",
             (data['nom série'], data['numéro episode'], data['numéro saison'], data['date diffusion']))
@@ -62,6 +73,7 @@ def insert_multiple_datas(list_datas):
 if __name__ == '__main__':
     create_database()
     today = datetime.date.today()
-    insert_multiple_datas(get_all_episode(False, "NBC", True))
+    insert_multiple_datas(get_all_episode())
+    # insert_multiple_datas_with_duration(get_all_episode(False, "NBC", True))
 
     conn.close()
