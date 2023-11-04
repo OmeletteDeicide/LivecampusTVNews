@@ -22,6 +22,13 @@ def create_database():
             linked_url TEXT
         )
     ''')
+    cur.execute('''
+        CREATE TABLE IF NOT EXISTS duration (
+            duree INTEGER,
+            episode_id INTEGER,
+            FOREIGN KEY (episode_id) REFERENCES episode(id)
+        )
+    ''')
 
     conn.commit()
 
@@ -36,11 +43,18 @@ def insert_one_data(nom: str, episode_number: int, season_number: int, diffusion
 
 
 def insert_multiple_datas(list_datas):
+    i = 1
     for data in list_datas:
         cur.execute("INSERT INTO episode (nom, episode_number, season_number, diffusion_date, origin_country, "
                     "broadcast_channel, linked_url) VALUES (?, ?, ?, ?, ?, ?, ?)",
                     (data['nom série'], data['numéro episode'], data['numéro saison'], data['date diffusion'],
-                     data['origine'], data['plateform'], data['url']))
+                     data['origine'], data['chaine'], data['url']))
+        cur.execute(
+            "SELECT id FROM episode WHERE nom=? AND episode_number=? AND season_number=? AND diffusion_date=?;",
+            (data['nom série'], data['numéro episode'], data['numéro saison'], data['date diffusion']))
+        episode_id = cur.fetchone()
+        cur.execute("INSERT INTO duration (duree, episode_id) VALUES (?, ?)",
+                    (data['durée'], episode_id[0]))
 
     conn.commit()
 
@@ -48,4 +62,6 @@ def insert_multiple_datas(list_datas):
 if __name__ == '__main__':
     create_database()
     today = datetime.date.today()
-    insert_multiple_datas(get_all_episode())
+    insert_multiple_datas(get_all_episode(False, "NBC", True))
+
+    conn.close()
