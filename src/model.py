@@ -5,7 +5,7 @@ from src.scrapper import get_all_episode
 
 sqlite3.register_adapter(datetime.date, lambda val: val.isoformat())
 
-conn = sqlite3.connect('../data/database.db')
+conn = sqlite3.connect('./data/databases/database.db')
 cur = conn.cursor()
 
 
@@ -68,12 +68,3 @@ def insert_multiple_datas_with_duration(list_datas):
                     (data['durée'], episode_id[0]))
 
     conn.commit()
-
-
-if __name__ == '__main__':
-    create_database()
-    today = datetime.date.today()
-    insert_multiple_datas(get_all_episode())
-    # insert_multiple_datas_with_duration(get_all_episode(False, "NBC", True))
-
-    conn.close()
