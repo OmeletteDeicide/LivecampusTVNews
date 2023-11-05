@@ -24,6 +24,7 @@ def create_database():
     ''')
     cur.execute('''
         CREATE TABLE IF NOT EXISTS duration (
+            nom_chaine TEXT,
             duree INTEGER,
             episode_id INTEGER,
             FOREIGN KEY (episode_id) REFERENCES episode(id)
@@ -64,7 +65,7 @@ def insert_multiple_datas_with_duration(list_datas):
             "SELECT id FROM episode WHERE nom=? AND episode_number=? AND season_number=? AND diffusion_date=?;",
             (data['nom série'], data['numéro episode'], data['numéro saison'], data['date diffusion']))
         episode_id = cur.fetchone()
-        cur.execute("INSERT INTO duration (duree, episode_id) VALUES (?, ?)",
-                    (data['durée'], episode_id[0]))
+        cur.execute("INSERT INTO duration (nom_chaine, duree, episode_id) VALUES (?, ?, ?)",
+                    (data['chaine'], data['durée'], episode_id[0]))
 
     conn.commit()
